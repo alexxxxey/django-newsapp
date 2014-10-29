@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-29 23:18+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: admin.py:32
+msgid "Title section"
+msgstr ""
+
+#: admin.py:36
+msgid "Additional"
+msgstr ""
+
+#: admin.py:40
+msgid "Short content"
+msgstr ""
+
+#: admin.py:44
+msgid "Full content"
+msgstr ""
+
+#: models.py:13
+msgid "title"
+msgstr ""
+
+#: models.py:14
+msgid "slug"
+msgstr ""
+
+#: models.py:15
+msgid "brief"
+msgstr ""
+
+#: models.py:16
+msgid "content"
+msgstr ""
+
+#: models.py:17 templates/new.html:20
+msgid "date added"
+msgstr ""
+
+#: models.py:18
+msgid "active"
+msgstr ""
+
+#: models.py:19 models.py:40
+msgid "read more"
+msgstr ""
+
+#: models.py:19
+msgid "read more button text"
+msgstr ""
+
+#: models.py:20
+msgid "image"
+msgstr ""
+
+#: models.py:23
+msgid "new"
+msgstr ""
+
+#: models.py:24
+msgid "news"
+msgstr ""
+
+#: templates/_archive.html:4
+msgid "News archive"
+msgstr ""
+
+#: templates/_archive.html:7
+msgid "reset"
+msgstr ""
+
+#: templates/news.html:11
+msgid "year"
+msgstr ""
+
+#: templates/news.html:11
+msgid "page"
+msgstr ""
