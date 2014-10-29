@@ -7,7 +7,7 @@
 
 
     <section class="newsapp-lists">
-        <h1>{{ menu.get_h1_title }}
+        <h1>{% trans "news"|capfirst %}
             {% if archive_date %}<small>({% if month %}{{ archive_date|date:"F Y" }}{% else %}{% trans "year"|capfirst %} {{ archive_date|date:"Y" }}{% endif %})</small>{% endif %}{% if news_list.has_previous %}<small> - {% trans "page" %} {{ news_list.number }}</small>{% endif %}
         </h1>
         {% for item in news_list.object_list %}
@@ -23,29 +23,31 @@
                     {% endif %}
                     {{ item.content_short|safe }}
 
-                <div class="clearfix"></div>
+                <br clear="all">
 
                 {% if item.content %}
                     <a href="{{ item.get_absolute_url }}">{{ item.get_more_text }}</a>
                 {% endif %}
 
-                <div class="clearfix"></div>
+                <br clear="all">
             </article>
         {% endfor %}
+
+        <br clear="all">
 
         {% if news_list.has_other_pages %}
             <ul class="newsapp-pagination">
                 {% if news_list.has_previous %}
                     <li>
-                        <li><a href="{{ menu.get_absolute_url }}{{ url_params }}page-{{ news_list.previous_page_number }}/">«</a></li>
+                        <li><a href="{% url 'news_all' %}{{ url_params }}page-{{ news_list.previous_page_number }}/">«</a></li>
                 {% endif %}
 
                 {% for page in news_list.paginator.page_range %}
-                    <li{% if page == news_list.number %} class="active"{% endif %}><a href="{{ menu.get_absolute_url }}{{ url_params }}page-{{ page }}/">{{ page }}</a></li>
+                    <li{% if page == news_list.number %} class="active"{% endif %}><a href="{% url 'news_all' %}{{ url_params }}page-{{ page }}/">{{ page }}</a></li>
                 {% endfor %}
 
                 {% if news_list.has_next %}
-                    <li><a href="{{ menu.get_absolute_url }}{{ url_params }}page-{{ news_list.next_page_number }}/">»</a></li>
+                    <li><a href="{% url 'news_all' %}{{ url_params }}page-{{ news_list.next_page_number }}/">»</a></li>
                 {% endif %}
             </ul>
         {% endif %}
