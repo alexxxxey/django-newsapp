@@ -1,2 +1,2 @@
 django_newsapp.egg-info
-.pyc
+*.pyc
