@@ -9,13 +9,13 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
 
-setup(name='django-news-app',
+setup(name='django-newsapp',
       version='0.0.1',
       description='Django news module',
       long_description='Django news module',
       author='Alexey Osovitniy',
       author_email='a@trialine.lv',
-      packages=['news-app',],
+      packages=['newsapp',],
       url='https://github.com/alexxxxey/django-news-app',
       include_package_data=True,
       zip_safe=False,
