@@ -1,0 +1,23 @@
+{% load i18n %}
+{% if date_archive_menu %}
+<aside>
+    <h3>{% trans "News archive" %}</h3>
+    <ul>
+        <li>
+            <a href="{% url 'news_all' %}"><b>{% trans "reset"|capfirst %}</b></a>
+        </li>
+
+        {% for item in date_archive_menu %}
+            {% ifchanged %}
+                <li class="b-left-nav__subheader">
+                    <h4><a href="{{ menu.get_absolute_url }}{{ item.year }}/">{{ item.year }}</a></h4>
+                </li>
+            {% endifchanged %}
+
+            <li{% if forloop.last %} class="b-left-nav__last"{% endif %}>
+                <a href="{{ menu.get_absolute_url }}{{ item.year }}/{{ item.month}}/">{{ item.date_added|date:"F Y"|title }} <span>({{ item.cnt }})</span></a>
+            </li>
+        {% endfor %}
+    </ul>
+</aside>
+{% endif %}

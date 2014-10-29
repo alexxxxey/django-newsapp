@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load thumbnail i18n %}
+
+{% block content %}
+
+    {% include "_archive.html" %}
+
+    <article class="newsapp-opened">
+        <h1>{{ item.title }}</h1>
+        {% if item.image %}
+            <figure class="b-new__img">
+                <a class="j_modal-img" href="{{ item.image.url }}" title="{{ room.title }}">
+                    <img class="pull-left" src="{{ item.image|thumbnail_url:'news_open' }}" alt="{{ item.title }}" />
+                </a>
+            </figure>
+        {% endif %}
+        {{ item.content|safe }}
+        <div class="clearfix"></div>
+        <br />
+        <time class="label label-default" datetime="{{ item.date_added|date:"Y.m.d" }}">{% trans "date added"|capfirst %}: {{ item.date_added|date:"d.m.Y" }}</time>
+    </article>
+
+{% endblock content %}
