@@ -1,11 +1,7 @@
-{% extends "base.html" %}
+{% extends "newsapp/layout.html" %}
 {% load thumbnail i18n %}
 
-{% block content %}
-
-    {% include "_archive.html" %}
-
-
+{% block newsapp_content %}
     <section class="newsapp-lists">
         <h1>{% trans "news"|capfirst %}
             {% if archive_date %}<small>({% if month %}{{ archive_date|date:"F Y" }}{% else %}{% trans "year"|capfirst %} {{ archive_date|date:"Y" }}{% endif %})</small>{% endif %}{% if news_list.has_previous %}<small> - {% trans "page" %} {{ news_list.number }}</small>{% endif %}
@@ -30,6 +26,7 @@
                 {% endif %}
 
                 <br clear="all">
+
             </article>
         {% endfor %}
 
@@ -52,9 +49,5 @@
             </ul>
         {% endif %}
     </section>
-
-
-
-
-{% endblock content %}
+{% endblock newsapp_content %}
 

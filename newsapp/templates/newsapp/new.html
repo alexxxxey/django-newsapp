@@ -1,0 +1,24 @@
+{% extends "newsapp/layout.html" %}
+{% load thumbnail i18n %}
+
+{% block newsapp_content %}
+    <section class="newsapp-opened" itemscope="" itemtype="http://schema.org/Article">
+        <meta itemprop="discussionUrl" content="http://{{ request.get_host  }}{{ item.get_absolute_url }}">
+        <meta itemprop="datePublished" content="{{ item.date_added|date:"Y.m.d" }}">
+
+        <h1 itemprop="headline name">{{ item.title }}</h1>
+        {% if item.image %}
+            <figure>
+                <a href="{{ item.image.url }}" title="{{ item.title }}">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}" />
+                </a>
+            </figure>
+        {% endif %}
+        <article itemprop="articleBody">
+            {{ item.content|safe }}
+        </article>
+        <time itemprop="datePublished" datetime="{{ item.date_added|date:"Y.m.d" }}">{% trans "date added"|capfirst %}: {{ item.date_added|date:"d.m.Y" }}</time>
+    </section>
+{% endblock newsapp_content %}
+
+
