@@ -8,9 +8,9 @@ News module for Django framework
 2. For Django 1.7 run:
 ./manage.py migrate newsapp
 
-2. Include the polls URLconf in your project urls.py like this::
+2. Include the news URLconf in your project urls.py like this::
 
-    url(r'^news/', include('polls.urls')),
+    url(r'^news/', include('newsapp.urls')),
 
 3. Start the development server and visit http://127.0.0.1:8000/admin/
    to create a new (you'll need the Admin app enabled).
