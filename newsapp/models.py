@@ -17,7 +17,7 @@ class New(models.Model):
     _translation_fields = ['title', 'content_short', 'content', 'more_text']
 
     title = models.CharField(_('title'), max_length=256)
-    slug = models.SlugField(_('slug'), blank=True)
+    slug = models.SlugField(_('slug'), blank=True, unique=True)
     content_short = models.TextField(_('brief') )
     content = models.TextField(_('content'), blank=True)
     date_added = models.DateTimeField(_('date added'), default=datetime.datetime.today)
