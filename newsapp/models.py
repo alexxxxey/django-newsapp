@@ -7,6 +7,12 @@ import datetime
 from django.core.urlresolvers import reverse
 from settings_newsapp import ENABLE_ARCHIVE
 
+
+# First, define the Manager subclass.
+class ActiveNewsManager(models.Manager):
+    def get_queryset(self):
+        return super(ActiveNewsManager, self).get_queryset().filter(active=True, date_added__lte=datetime.datetime.now())
+
 class New(models.Model):
     _translation_fields = ['title', 'content_short', 'content', 'more_text']
 
@@ -18,6 +24,11 @@ class New(models.Model):
     active = models.BooleanField(_('active'), default=True)
     more_text = models.CharField(_('read more'), max_length=256, blank=True, help_text=_('read more button text'))
     image = ThumbnailerImageField(_('image'), upload_to='news', resize_source=dict(size=(1024, 1024)), blank=True, null=True)
+
+
+    objects = models.Manager() # The default manager.
+    active_objects = ActiveNewsManager() # The Dahl-specific manager.
+
 
     class Meta:
         verbose_name = _('new')
@@ -43,7 +54,7 @@ class New(models.Model):
     def date_archive():
         if ENABLE_ARCHIVE:
             date_archive = New.objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).order_by('-year', '-month')
-            date_archive = date_archive.filter(active=True, date_added__lte=datetime.datetime.now())
+            date_archive = date_archive.active_objects()
             date_archive.query.group_by = ['year', 'month']
             date_archive = date_archive.annotate(cnt=Count("pk"))
             return date_archive
