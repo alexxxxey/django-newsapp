@@ -53,8 +53,7 @@ class New(models.Model):
     @staticmethod
     def date_archive():
         if ENABLE_ARCHIVE:
-            date_archive = New.objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).order_by('-year', '-month')
-            date_archive = date_archive.active_objects()
+            date_archive = New.active_objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).order_by('-year', '-month')
             date_archive.query.group_by = ['year', 'month']
             date_archive = date_archive.annotate(cnt=Count("pk"))
             return date_archive
