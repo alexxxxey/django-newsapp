@@ -8,7 +8,7 @@
         </h1>
         {% for item in news_list.object_list %}
             <article>
-                <time datetime="{{ item.publication_date|date:"Y.m.d" }}">{{ item.publication_date|date:"d.m.Y" }}</time>
+                <time datetime="{{ item.date_added|date:"Y.m.d" }}">{{ item.date_added|date:"d.m.Y" }}</time>
                 <h2><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h2>
                     {% if item.image %}
                         <figure>
