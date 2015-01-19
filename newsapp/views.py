@@ -15,8 +15,6 @@ def news_list(request, page=1, year=None, month=None):
     archive_date = None
     url_params = []
 
-    menu = None
-
     if year:
         list_filters['date_added__year'] = year
         archive_date = datetime.date(int(year), 1, 1)
@@ -49,7 +47,6 @@ def news_list(request, page=1, year=None, month=None):
 
     return render_to_response(
         'newsapp/news.html', {
-            'menu': menu,
             'news_list': news_list,
             'date_archive_menu': date_archive,
             'archive_date': archive_date,
