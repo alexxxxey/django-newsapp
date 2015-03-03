@@ -1,4 +1,4 @@
-from modeltranslation.translator import translator, TranslationOptions
+from modeltranslation.translator import translator, TranslationOptions, AlreadyRegistered
 from .models import New
 
 for model in [New]:
@@ -6,4 +6,7 @@ for model in [New]:
         translation_option = type("{0}Translation".format(model.__name__), (TranslationOptions,), {
             'fields': model._translation_fields,
         })
-        translator.register(model, translation_option)
+        try:
+            translator.register(model, translation_option)
+        except AlreadyRegistered:
+            pass
