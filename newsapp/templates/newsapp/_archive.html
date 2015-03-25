@@ -10,12 +10,12 @@
         {% for item in date_archive_menu %}
             {% ifchanged %}
                 <li class="b-left-nav__subheader">
-                    <h4><a href="{{ menu.get_absolute_url }}{{ item.year }}/">{{ item.year }}</a></h4>
+                    <h4><a href="{% url 'news_all' %}{{ item.year }}/">{{ item.year }}</a></h4>
                 </li>
             {% endifchanged %}
 
             <li{% if forloop.last %} class="b-left-nav__last"{% endif %}>
-                <a href="{{ menu.get_absolute_url }}{{ item.year }}/{{ item.month}}/">{{ item.date_added|date:"F Y"|title }} <span>({{ item.cnt }})</span></a>
+                <a href="{% url 'news_all' %}{{ item.year }}/{{ item.month}}/">{{ item.date_added|date:"F Y"|title }} <span>({{ item.cnt }})</span></a>
             </li>
         {% endfor %}
     </ul>
