@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
-from settings_newsapp import NEWS_ON_PAGE
+from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES
 from .models import New
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponsePermanentRedirect
@@ -9,11 +9,12 @@ from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 
 
-def news_list(request, page=1, year=None, month=None):
-
+def news_list(request, page=1, year=None, month=None, category_url=None):
+    # import ipdb; ipdb.set_trace()
     list_filters = {}
     archive_date = None
     url_params = []
+    categories = None
 
     if year:
         list_filters['date_added__year'] = year
@@ -24,6 +25,13 @@ def news_list(request, page=1, year=None, month=None):
         list_filters['date_added__month'] = month
         archive_date = datetime.date(int(year), int(month), 1)
         url_params.append(month)
+
+    if ENABLE_CATEGORIES:
+        from .models import NewCategory
+        categories = NewCategory.objects.all()
+        if category_url:
+            list_filters['new_category__slug'] = category_url
+            url_params.append("category/"+category_url)
 
 
     if url_params:
@@ -42,8 +50,9 @@ def news_list(request, page=1, year=None, month=None):
     news_list = paginator.page(page)
 
 
-    if not news_list:
-        raise Http404
+    # if not news_list:
+    #     raise Http404
+
 
     return render_to_response(
         'newsapp/news.html', {
@@ -52,7 +61,8 @@ def news_list(request, page=1, year=None, month=None):
             'archive_date': archive_date,
             'year': year,
             'month': month,
-            'url_params': url_params
+            'url_params': url_params,
+            'categories_list': categories
     }, context_instance=RequestContext(request))
 
 

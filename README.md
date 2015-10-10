@@ -5,7 +5,7 @@ News module for Django framework
 
 
 1. Add "newsapp" to INSTALLED_APPS
-2. For Django 1.7 run:
+2. For Django 1.8 run:
 ./manage.py migrate newsapp
 
 2. Include the news URLconf in your project urls.py like this::
@@ -18,4 +18,5 @@ News module for Django framework
 
 * support modeltranslation
 * have archive widget (by years and months)
+* have categories (in settings.py NEWSAPP_ENABLE_CATEGORIES = True)
 * have only active news manager ( New.active_objects.all() )

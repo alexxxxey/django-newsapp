@@ -5,7 +5,27 @@ from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.core.urlresolvers import reverse
-from settings_newsapp import ENABLE_ARCHIVE
+from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
+
+
+if ENABLE_CATEGORIES:
+    class NewCategory(models.Model):
+        _translation_fields = ['title',]
+        title = models.CharField(_('title'), max_length=256)
+        slug = models.SlugField(_('slug'), blank=True, unique=True)
+        position = models.SmallIntegerField(_('position'), default=0)
+
+        class Meta:
+            verbose_name = _('new category')
+            verbose_name_plural = _('new categories')
+            ordering = ('position',)
+
+
+        def __unicode__(self):
+            return self.title
+
+        def get_absolute_url(self):
+            return "{0}".format(reverse("new_category", kwargs={"category_url": self.slug,}))
 
 
 # First, define the Manager subclass.
@@ -24,6 +44,9 @@ class New(models.Model):
     active = models.BooleanField(_('active'), default=True)
     more_text = models.CharField(_('read more'), max_length=256, blank=True, help_text=_('read more button text'))
     image = ThumbnailerImageField(_('image'), upload_to='news', resize_source=dict(size=(1024, 1024)), blank=True, null=True)
+    if ENABLE_CATEGORIES:
+        new_category = models.ManyToManyField(NewCategory, verbose_name=_('new categories') )
+
 
 
     objects = models.Manager() # The default manager.
