@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
 from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES
-from .models import New
+from .models import New, NewCategory
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.core.paginator import Paginator
@@ -15,6 +15,7 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
     archive_date = None
     url_params = []
     categories = None
+    current_category = None
 
     if year:
         list_filters['date_added__year'] = year
@@ -30,8 +31,9 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
         from .models import NewCategory
         categories = NewCategory.objects.all()
         if category_url:
-            list_filters['new_category__slug'] = category_url
-            url_params.append("category/"+category_url)
+            current_category = NewCategory.objects.get(slug=category_url)
+            list_filters['new_category__slug'] = current_category.slug
+            url_params.append("category/"+current_category.slug)
 
 
     if url_params:
@@ -62,7 +64,8 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
             'year': year,
             'month': month,
             'url_params': url_params,
-            'categories_list': categories
+            'categories_list': categories,
+            'current_category': current_category
     }, context_instance=RequestContext(request))
 
 
