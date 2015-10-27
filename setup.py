@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 setup(name='django-newsapp',
-      version='0.0.1',
+      version='0.5.',
       description='Django news module',
       long_description='Django news module',
       author='Alexey Osovitniy',
