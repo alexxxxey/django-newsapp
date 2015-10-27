@@ -2,7 +2,11 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
 from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES
-from .models import New, NewCategory
+from .models import New
+
+if ENABLE_CATEGORIES:
+    from .models import NewCategory
+
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.core.paginator import Paginator

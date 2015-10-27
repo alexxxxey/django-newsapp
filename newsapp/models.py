@@ -5,8 +5,8 @@ from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.core.urlresolvers import reverse
-from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
-
+from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS
+from newsapp import class_for_name
 
 if ENABLE_CATEGORIES:
     class NewCategory(models.Model):
@@ -33,7 +33,7 @@ class ActiveNewsManager(models.Manager):
     def get_queryset(self):
         return super(ActiveNewsManager, self).get_queryset().filter(active=True, date_added__lte=datetime.datetime.now())
 
-class New(models.Model):
+class NewAbstract(models.Model):
     _translation_fields = ['title', 'content_short', 'content', 'more_text']
 
     title = models.CharField(_('title'), max_length=256)
@@ -57,6 +57,7 @@ class New(models.Model):
         verbose_name = _('new')
         verbose_name_plural = _('news')
         ordering = ('-date_added',)
+        abstract = True
 
     def __unicode__(self):
         return self.title
@@ -84,3 +85,9 @@ class New(models.Model):
             # import ipdb; ipdb.set_trace()
             return date_archive
         return None
+
+
+
+
+class New(class_for_name(NEWS_CLASS) if NEWS_CLASS else NewAbstract):
+    pass

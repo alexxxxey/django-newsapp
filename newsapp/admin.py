@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import New
+from newsapp.models import New
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from settings_newsapp import ENABLE_CATEGORIES
