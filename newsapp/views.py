@@ -50,7 +50,7 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
 
     date_archive = New.date_archive()
 
-    news = New.objects.filter(active=True, date_added__lte=datetime.datetime.now(), **list_filters)
+    news = New.active_objects.filter(**list_filters)
 
     paginator = Paginator(news, NEWS_ON_PAGE)
     news_list = paginator.page(page)
@@ -75,7 +75,7 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
 
 
 def render_new(request, opened_url):
-    news_item = get_object_or_404(New, slug=opened_url)
+    news_item = get_object_or_404(New.active_objects, slug=opened_url)
     date_archive = New.date_archive()
 
     return render_to_response(
