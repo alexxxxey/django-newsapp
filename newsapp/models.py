@@ -49,8 +49,8 @@ class NewAbstract(models.Model):
 
 
 
-    objects = models.Manager() # The default manager.
-    active_objects = ActiveNewsManager() # The Dahl-specific manager.
+    objects = models.Manager()
+    active_objects = ActiveNewsManager()
 
 
     class Meta:
@@ -81,8 +81,6 @@ class NewAbstract(models.Model):
             date_archive.query.group_by = ['year', 'month']
             date_archive = date_archive.annotate(cnt=Count("pk"))
 
-            # print date_archive
-            # import ipdb; ipdb.set_trace()
             return date_archive
         return None
 

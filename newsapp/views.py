@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
-from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES
+from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL
 from .models import New
 
 if ENABLE_CATEGORIES:
@@ -16,6 +16,7 @@ from django.core.urlresolvers import reverse
 def news_list(request, page=1, year=None, month=None, category_url=None):
     # import ipdb; ipdb.set_trace()
     list_filters = {}
+    list_excludes = {}
     archive_date = None
     url_params = []
     categories = None
@@ -39,6 +40,8 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
             list_filters['new_category__slug'] = current_category.slug
             url_params.append("category/"+current_category.slug)
 
+    if EXCLUDE_CATS_SLUG_FROM_ALL:
+        list_excludes['new_category__slug__in'] = EXCLUDE_CATS_SLUG_FROM_ALL
 
     if url_params:
         url_params = "/".join(url_params)+"/"
@@ -50,14 +53,11 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
 
     date_archive = New.date_archive()
 
-    news = New.active_objects.filter(**list_filters)
+    news = New.active_objects.filter(**list_filters).exclude(**list_excludes)
 
     paginator = Paginator(news, NEWS_ON_PAGE)
     news_list = paginator.page(page)
 
-
-    # if not news_list:
-    #     raise Http404
 
 
     return render_to_response(
