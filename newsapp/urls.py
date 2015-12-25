@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.news_list, name="news_all"),
-    url(r'^page-1/$', lambda x: redirect(views.news_all, permanent=True)),
+    url(r'^page-1/$', lambda x: redirect(views.news_list, permanent=True)),
     url(r'^page-(?P<page>[\d]+)/$', views.news_list),
 ]
 
