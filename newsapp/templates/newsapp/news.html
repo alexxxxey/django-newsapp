@@ -11,14 +11,11 @@
 
         {% block newsapp_categories %}
             {% if categories_list %}
-                <div class="category-list">
-                    <ul>
-                        <li{% if not current_category %} class="active"{% endif %}><a href="{% url "news_all" %}">{% trans "all"|capfirst %}</a></li>
+                <div class="b-p-cats b-p-cats_pos_left">
+                    {# <li{% if not current_category %} class="active"{% endif %}><a href="{% url "news_all" %}">{% trans "all"|capfirst %}</a></li> #}
                     {% for category in categories_list %}
-                        <li{% if current_category.slug == category.slug %} class="active"{% endif %}><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+                        <a href="{{ category.get_absolute_url }}" {% if current_category.slug == category.slug %} class="b-p-cats__active"{% endif %}>{{ category.title }}</a>
                     {% endfor %}
-                    </ul>
-
                 </div>
             {% endif %}
         {% endblock newsapp_categories %}
