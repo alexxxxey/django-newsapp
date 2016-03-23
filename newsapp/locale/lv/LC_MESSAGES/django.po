@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-newsapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 00:01+0300\n"
-"PO-Revision-Date: 2015-10-14 00:02+0200\n"
+"POT-Creation-Date: 2016-03-23 01:03+0200\n"
+"PO-Revision-Date: 2016-03-23 01:03+0200\n"
 "Last-Translator: alexey <alexey@trialine.lv>\n"
 "Language-Team: trialine.lv <a@trialine.lv>\n"
 "Language: lv\n"
@@ -17,87 +17,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.6\n"
 
-#: admin.py:39
+#: admin.py:49
 msgid "Title section"
 msgstr "Nosaukumu sadaļa"
 
-#: admin.py:43
+#: admin.py:53
 msgid "Additional"
 msgstr "Papildus"
 
-#: admin.py:47
-msgid "Short content"
+#: admin.py:57
+msgid "Brief"
 msgstr "Īss saturs"
 
-#: admin.py:51
-msgid "Full content"
-msgstr "Pilns saturs"
+#: admin.py:61
+msgid "Content"
+msgstr "Saturs"
 
-#: admin.py:60
+#: admin.py:70
 msgid "Categories"
-msgstr ""
+msgstr "Kategorijas"
 
-#: models.py:14 models.py:39
+#: admin.py:79
+msgid "Tags"
+msgstr "Birkas"
+
+#: models.py:14 models.py:34 models.py:59
 msgid "title"
 msgstr "nosaukums"
 
-#: models.py:15 models.py:40
+#: models.py:15 models.py:35 models.py:60
 msgid "slug"
 msgstr "url"
 
-#: models.py:16
+#: models.py:16 models.py:36
 msgid "position"
 msgstr "pozīcija"
 
 #: models.py:19
 msgid "new category"
-msgstr "jauumu kategorija"
+msgstr "kategorija"
 
-#: models.py:20 models.py:48
+#: models.py:20 models.py:68
 msgid "new categories"
-msgstr "jaunumu kategorijas"
+msgstr "kategorijas"
 
-#: models.py:41
+#: models.py:39
+msgid "tag"
+msgstr "birka"
+
+#: models.py:40 models.py:70
+msgid "tags"
+msgstr "birkas"
+
+#: models.py:61
 msgid "brief"
 msgstr "īss saturs"
 
-#: models.py:42
+#: models.py:62
 msgid "content"
 msgstr "saturs"
 
-#: models.py:43 templates/newsapp/new.html:20
+#: models.py:63 templates/newsapp/new.html.py:20
 msgid "date added"
 msgstr "pievienošanas datums"
 
-#: models.py:44
+#: models.py:64
 msgid "active"
 msgstr "aktīvs"
 
-#: models.py:45 models.py:74
+#: models.py:65 models.py:96
 msgid "read more"
 msgstr "lasīt tālāk"
 
-#: models.py:45
+#: models.py:65
 msgid "read more button text"
 msgstr "\"lasīt tālāk\" pogas nosaukums"
 
-#: models.py:46
+#: models.py:66
 msgid "image"
 msgstr "bilde"
 
-#: models.py:57
+#: models.py:78
 msgid "new"
 msgstr "jaunums"
 
-#: models.py:58 templates/newsapp/news.html:7
+#: models.py:79 templates/newsapp/news.html.py:7
 msgid "news"
 msgstr "jaunumi"
 
 #: templates/newsapp/_archive.html:4
 msgid "News archive"
-msgstr "Jaunumu arhīvs"
+msgstr "Arhīvs"
 
 #: templates/newsapp/_archive.html:7
 msgid "reset"
@@ -111,10 +123,15 @@ msgstr "gads"
 msgid "page"
 msgstr "lapa"
 
-#: templates/newsapp/news.html:16
-msgid "all"
-msgstr "visi"
-
-#: templates/newsapp/news.html:70
+#: templates/newsapp/news.html:68
 msgid "News not found!"
 msgstr "Informācija nav atrasta!"
+
+#~ msgid "Short content"
+#~ msgstr "Īss saturs"
+
+#~ msgid "Full content"
+#~ msgstr "Pilns saturs"
+
+#~ msgid "all"
+#~ msgstr "visi"

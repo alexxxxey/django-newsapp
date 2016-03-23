@@ -5,7 +5,7 @@ from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.core.urlresolvers import reverse
-from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS
+from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS, ENABLE_TAGS
 from newsapp import class_for_name
 
 if ENABLE_CATEGORIES:
@@ -28,6 +28,26 @@ if ENABLE_CATEGORIES:
             return "{0}".format(reverse("new_category", kwargs={"category_url": self.slug,}))
 
 
+if ENABLE_TAGS:
+    class Tag(models.Model):
+        _translation_fields = ['title',]
+        title = models.CharField(_('title'), max_length=256)
+        slug = models.SlugField(_('slug'), blank=True, unique=True)
+        position = models.SmallIntegerField(_('position'), default=0)
+
+        class Meta:
+            verbose_name = _('tag')
+            verbose_name_plural = _('tags')
+            ordering = ('position',)
+
+
+        def __unicode__(self):
+            return self.title
+
+        def get_absolute_url(self):
+            return "{0}".format(reverse("tag", kwargs={"tag_url": self.slug,}))
+
+
 # First, define the Manager subclass.
 class ActiveNewsManager(models.Manager):
     def get_queryset(self):
@@ -46,7 +66,8 @@ class NewAbstract(models.Model):
     image = ThumbnailerImageField(_('image'), upload_to='news', resize_source=dict(size=(1024, 1024)), blank=True, null=True)
     if ENABLE_CATEGORIES:
         new_category = models.ManyToManyField(NewCategory, verbose_name=_('new categories') )
-
+    if ENABLE_TAGS:
+        tag = models.ManyToManyField(Tag, verbose_name=_('tags') )
 
 
     objects = models.Manager()
@@ -77,7 +98,7 @@ class NewAbstract(models.Model):
     @staticmethod
     def date_archive():
         if ENABLE_ARCHIVE:
-            date_archive = New.active_objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).values('year', 'month').order_by('-year', '-month')
+            date_archive = New.active_objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).values('year', 'month', 'date_added').order_by('-year', '-month')
             date_archive.query.group_by = ['year', 'month']
             date_archive = date_archive.annotate(cnt=Count("pk"))
 

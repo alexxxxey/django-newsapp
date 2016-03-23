@@ -3,7 +3,7 @@ from django.contrib import admin
 from newsapp.models import New
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from settings_newsapp import ENABLE_CATEGORIES
+from settings_newsapp import ENABLE_CATEGORIES, ENABLE_TAGS
 
 
 if 'modeltranslation' in settings.INSTALLED_APPS:
@@ -29,12 +29,22 @@ if ENABLE_CATEGORIES:
         list_editable = ('position',)
     admin.site.register(NewCategory, NewCategoryAdmin)
 
+
+if ENABLE_TAGS:
+    from .models import Tag
+    class TagAdmin(ParentModel):
+        list_display = ('title', 'slug', 'position')
+        prepopulated_fields = {"slug": ("title",)}
+        list_editable = ('position',)
+    admin.site.register(Tag, TagAdmin)
+
+
 class NewAdmin(ParentModel):
     list_display = ('title', 'date_added', 'active')
     prepopulated_fields = {"slug": ("title",)}
     date_hierarchy = 'date_added'
     formfield_overrides = news_formfield_overrides
-
+    filter_horizontal = []
     fieldsets = (
         (_('Title section') , {
             'fields': ('title', 'slug', ),
@@ -44,17 +54,17 @@ class NewAdmin(ParentModel):
             'fields': ('date_added', 'active', 'image',)
         }),
 
-        (_('Short content'), {
+        (_('Brief'), {
            'fields': ('content_short',)
         }),
 
-        (_('Full content'), {
+        (_('Content'), {
            'fields': ('content',)
         }),
     )
 
     if ENABLE_CATEGORIES:
-        filter_horizontal = ('new_category',)
+        filter_horizontal.append('new_category',)
         list_filter = ('new_category',)
         fieldsets = fieldsets + (
         (_('Categories') , {
@@ -62,4 +72,12 @@ class NewAdmin(ParentModel):
         }),
         )
 
+    if ENABLE_TAGS:
+        filter_horizontal.append('tag',)
+        list_filter = ('tag',)
+        fieldsets = fieldsets + (
+        (_('Tags') , {
+            'fields': ('tag', ),
+        }),
+        )
 admin.site.register(New, NewAdmin)

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djang-newsapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 00:01+0300\n"
-"PO-Revision-Date: 2015-10-14 00:03+0200\n"
+"POT-Creation-Date: 2016-03-23 01:03+0200\n"
+"PO-Revision-Date: 2016-03-23 01:03+0200\n"
 "Last-Translator: alexey <alexey@trialine.lv>\n"
 "Language-Team: trialine.lv <a@trialine.lv>\n"
 "Language: ru\n"
@@ -17,87 +17,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.6\n"
 
-#: admin.py:39
+#: admin.py:49
 msgid "Title section"
 msgstr "Секция заголовка"
 
-#: admin.py:43
+#: admin.py:53
 msgid "Additional"
 msgstr "Дополнительно"
 
-#: admin.py:47
-msgid "Short content"
-msgstr "Короткое содержание"
+#: admin.py:57
+msgid "Brief"
+msgstr "Краткое описание"
 
-#: admin.py:51
-msgid "Full content"
-msgstr "Подное содержание"
+#: admin.py:61
+msgid "Content"
+msgstr "Содержание"
 
-#: admin.py:60
+#: admin.py:70
 msgid "Categories"
 msgstr "Рубрики"
 
-#: models.py:14 models.py:39
+#: admin.py:79
+msgid "Tags"
+msgstr "Теги"
+
+#: models.py:14 models.py:34 models.py:59
 msgid "title"
 msgstr "заголовок"
 
-#: models.py:15 models.py:40
+#: models.py:15 models.py:35 models.py:60
 msgid "slug"
 msgstr "ссылка"
 
-#: models.py:16
+#: models.py:16 models.py:36
 msgid "position"
 msgstr "позиция"
 
 #: models.py:19
 msgid "new category"
-msgstr "Категория новости"
+msgstr "Рубрика"
 
-#: models.py:20 models.py:48
+#: models.py:20 models.py:68
 msgid "new categories"
-msgstr "Категории новости"
+msgstr "Рубрики"
 
-#: models.py:41
+#: models.py:39
+msgid "tag"
+msgstr "тег"
+
+#: models.py:40 models.py:70
+msgid "tags"
+msgstr "теги"
+
+#: models.py:61
 msgid "brief"
 msgstr "краткое описание"
 
-#: models.py:42
+#: models.py:62
 msgid "content"
 msgstr "содержание"
 
-#: models.py:43 templates/newsapp/new.html:20
+#: models.py:63 templates/newsapp/new.html.py:20
 msgid "date added"
 msgstr "дата добавления"
 
-#: models.py:44
+#: models.py:64
 msgid "active"
 msgstr "активный"
 
-#: models.py:45 models.py:74
+#: models.py:65 models.py:96
 msgid "read more"
 msgstr "читать далее"
 
-#: models.py:45
+#: models.py:65
 msgid "read more button text"
 msgstr "\"читать далее\" текст кнопки"
 
-#: models.py:46
+#: models.py:66
 msgid "image"
 msgstr "изображение"
 
-#: models.py:57
+#: models.py:78
 msgid "new"
 msgstr "новость"
 
-#: models.py:58 templates/newsapp/news.html:7
+#: models.py:79 templates/newsapp/news.html.py:7
 msgid "news"
 msgstr "новости"
 
 #: templates/newsapp/_archive.html:4
 msgid "News archive"
-msgstr "Архив новостей"
+msgstr "Архив"
 
 #: templates/newsapp/_archive.html:7
 msgid "reset"
@@ -111,10 +123,15 @@ msgstr "год"
 msgid "page"
 msgstr "страница"
 
-#: templates/newsapp/news.html:16
-msgid "all"
-msgstr "все"
-
-#: templates/newsapp/news.html:70
+#: templates/newsapp/news.html:68
 msgid "News not found!"
-msgstr "Новости не найдены!"
+msgstr "Информация не найдена!"
+
+#~ msgid "Short content"
+#~ msgstr "Короткое содержание"
+
+#~ msgid "Full content"
+#~ msgstr "Полное содержание"
+
+#~ msgid "all"
+#~ msgstr "все"

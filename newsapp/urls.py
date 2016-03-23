@@ -24,6 +24,12 @@ if ENABLE_CATEGORIES:
         url(r'^category/(?P<category_url>[\d\w-]+)/page-(?P<page>[\d]+)/$', views.news_list),
     ]
 
+if ENABLE_CATEGORIES:
+    urlpatterns += [
+        url(r'^tag/(?P<tag_url>[\d\w-]+)/$', views.news_list, name="tag"),
+        url(r'^tag/(?P<tag_url>[\d\w-]+)/page-(?P<page>[\d]+)/$', views.news_list),
+    ]
+
 
 urlpatterns += [
     url(r'^(?P<opened_url>[\d\w-]+)/$', views.render_new),
