@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
-from django.db.models import Count
+from django.db.models import Count, Max
 from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.core.urlresolvers import reverse
@@ -98,9 +98,16 @@ class NewAbstract(models.Model):
     @staticmethod
     def date_archive():
         if ENABLE_ARCHIVE:
-            date_archive = New.active_objects.extra(select={'year': "EXTRACT(year FROM date_added)", 'month': "EXTRACT(month from date_added)"}).values('year', 'month', 'date_added').order_by('-year', '-month')
+            date_archive = New.active_objects.extra(
+                select={
+                    'year': "EXTRACT(year FROM date_added)",
+                    'month': "EXTRACT(month from date_added)"}).values(
+                        'year',
+                        'month'
+                    ).order_by('-year', '-month')
+
             date_archive.query.group_by = ['year', 'month']
-            date_archive = date_archive.annotate(cnt=Count("pk"))
+            date_archive = date_archive.annotate(date_added=Max('date_added'), cnt=Count("pk"))
 
             return date_archive
         return None
