@@ -1,26 +1,28 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
-from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL
+from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL, ENABLE_TAGS
 from .models import New
-
-if ENABLE_CATEGORIES:
-    from .models import NewCategory
-
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 
+if ENABLE_CATEGORIES:
+    from .models import NewCategory
+if ENABLE_TAGS:
+    from .models import Tag
 
-def news_list(request, page=1, year=None, month=None, category_url=None):
-    # import ipdb; ipdb.set_trace()
+
+
+def news_list(request, page=1, year=None, month=None, category_url=None, tag_url=None):
     list_filters = {}
     list_excludes = {}
     archive_date = None
     url_params = []
     categories = None
     current_category = None
+    current_tag = None
 
     if year:
         list_filters['date_added__year'] = year
@@ -33,12 +35,18 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
         url_params.append(month)
 
     if ENABLE_CATEGORIES:
-        from .models import NewCategory
         categories = NewCategory.objects.all()
         if category_url:
             current_category = NewCategory.objects.get(slug=category_url)
             list_filters['new_category__slug'] = current_category.slug
             url_params.append("category/"+current_category.slug)
+
+    if ENABLE_TAGS:
+        tag = Tag.objects.all()
+        if tag_url:
+            current_tag = Tag.objects.get(slug=tag_url)
+            list_filters['tag__slug'] = current_tag.slug
+            url_params.append("tag/"+current_tag.slug)
 
     if EXCLUDE_CATS_SLUG_FROM_ALL:
         list_excludes['new_category__slug__in'] = EXCLUDE_CATS_SLUG_FROM_ALL
@@ -69,7 +77,8 @@ def news_list(request, page=1, year=None, month=None, category_url=None):
             'month': month,
             'url_params': url_params,
             'categories_list': categories,
-            'current_category': current_category
+            'current_category': current_category,
+            'current_tag': current_tag
     }, context_instance=RequestContext(request))
 
 

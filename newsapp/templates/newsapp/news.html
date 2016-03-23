@@ -2,9 +2,12 @@
 {% load i18n %}
 
 {% block newsapp_content %}
-    <section class="newsapp-lists">
+    <section class="newsapp-list">
         {% block heading %}
             <h1>{% trans "news"|capfirst %}
+                {% if current_category %}<small>{% trans "category" %}: {{ current_category.title }}</small>{% endif %}
+                {% if current_tag %}<small>{% trans "tag" %}: {{ current_tag.title }}</small>{% endif %}
+
                 {% if archive_date %}<small>({% if month %}{{ archive_date|date:"F Y" }}{% else %}{% trans "year"|capfirst %} {{ archive_date|date:"Y" }}{% endif %})</small>{% endif %}{% if news_list.has_previous %}<small> - {% trans "page" %} {{ news_list.number }}</small>{% endif %}
             </h1>
         {% endblock heading %}
@@ -40,6 +43,23 @@
                     {% if item.content %}
                         <a href="{{ item.get_absolute_url }}">{{ item.get_more_text }}</a>
                     {% endif %}
+
+                    <div class="taxonomy-wrap">
+                        <div class="taxonomy categories">
+                            <span>{% trans "categories"|capfirst %}:</span>
+                            {% for category in item.new_category.all %}
+                                <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                            {% endfor %}
+                        </div>
+
+                        <div class="taxonomy tags">
+                            <span>{% trans "tags"|capfirst %}:</span>
+                            {% for tag in item.tag.all %}
+                                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
 
                     <br clear="all">
 
