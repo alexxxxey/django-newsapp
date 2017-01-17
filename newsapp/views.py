@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 import datetime
 from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL, ENABLE_TAGS
@@ -68,7 +68,7 @@ def news_list(request, page=1, year=None, month=None, category_url=None, tag_url
 
 
 
-    return render_to_response(
+    return render(request,
         'newsapp/news.html', {
             'news_list': news_list,
             'date_archive_menu': date_archive,
@@ -79,7 +79,7 @@ def news_list(request, page=1, year=None, month=None, category_url=None, tag_url
             'categories_list': categories,
             'current_category': current_category,
             'current_tag': current_tag
-    }, context_instance=RequestContext(request))
+    })
 
 
 
@@ -87,11 +87,11 @@ def render_new(request, opened_url):
     news_item = get_object_or_404(New.active_objects, slug=opened_url)
     date_archive = New.date_archive()
 
-    return render_to_response(
+    return render(request,
         'newsapp/new.html', {
             'item': news_item,
             'date_archive_menu': date_archive
-        }, context_instance=RequestContext(request))
+        })
 
 
 
