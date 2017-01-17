@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.shortcuts import redirect
 from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
 from . import views
