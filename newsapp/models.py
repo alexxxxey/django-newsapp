@@ -73,7 +73,6 @@ class NewAbstract(models.Model):
     objects = models.Manager()
     active_objects = ActiveNewsManager()
 
-
     class Meta:
         verbose_name = _('new')
         verbose_name_plural = _('news')
@@ -85,6 +84,13 @@ class NewAbstract(models.Model):
 
     def get_absolute_url(self):
         return "{0}{1}/".format(reverse("news_all"), self.slug)
+
+    def get_prev(self):
+        return New.active_objects.filter(date_added__lt=self.date_added).first()
+
+    def get_next(self):
+        return New.active_objects.filter(date_added__gt=self.date_added).last()
+
 
     def get_page_title(self):
         return self.title
