@@ -1,6 +1,6 @@
 from modeltranslation.translator import translator, TranslationOptions, AlreadyRegistered
 from .models import New
-from settings_newsapp import ENABLE_CATEGORIES, ENABLE_TAGS
+from .settings_newsapp import ENABLE_CATEGORIES, ENABLE_TAGS
 
 for model in [New,]:
     if hasattr(model, '_translation_fields'):

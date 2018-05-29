@@ -3,7 +3,7 @@ from django.contrib import admin
 from newsapp.models import New
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from settings_newsapp import ENABLE_CATEGORIES, ENABLE_TAGS
+from .settings_newsapp import ENABLE_CATEGORIES, ENABLE_TAGS
 
 
 if 'modeltranslation' in settings.INSTALLED_APPS:
