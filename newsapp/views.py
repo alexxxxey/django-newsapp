@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.template import RequestContext
 import datetime
-from settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL, ENABLE_TAGS
+from .settings_newsapp import NEWS_ON_PAGE, ENABLE_CATEGORIES, EXCLUDE_CATS_SLUG_FROM_ALL, ENABLE_TAGS
 from .models import New
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.core.paginator import Paginator
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 if ENABLE_CATEGORIES:
     from .models import NewCategory

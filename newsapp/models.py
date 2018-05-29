@@ -4,8 +4,8 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from django.db.models import Count, Max
 from django.utils.translation import ugettext_lazy as _
 import datetime
-from django.core.urlresolvers import reverse
-from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS, ENABLE_TAGS
+from django.urls import reverse
+from .settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS, ENABLE_TAGS
 from newsapp import class_for_name
 
 if ENABLE_CATEGORIES:

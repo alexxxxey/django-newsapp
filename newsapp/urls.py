@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.shortcuts import redirect
-from settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
+from .settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
 from . import views
 
 
