@@ -1,24 +1,36 @@
 import os
-from setuptools import setup
+from setuptools import find_packages, setup
 
-setup(name='django-newsapp',
-      version='0.5.2',
-      description='Django news module',
-      long_description='Django news module',
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+    README = readme.read()
+
+# allow setup.py to be run from any path
+os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+setup(
+      name='django-newsapp',
+      version='1.0.0',
+      packages=find_packages(),
+      include_package_data=True,
+      description='Django News/Blog module',
+      long_description=README,
+      license='New BSD',
       author='Alexey Osovitniy',
       author_email='a@trialine.lv',
-      packages=['newsapp'],
       url='https://github.com/alexxxxey/django-news-app',
-      include_package_data=True,
       zip_safe=False,
-      requires=['django(>=1.4)', 'easy_thumbnails'],
-      classifiers=['Development Status :: Beta',
-                   'Environment :: Web Environment',
-                   'Framework :: Django',
-                   'Intended Audience :: Developers',
-                   'License :: OSI Approved :: BSD License',
-                   'Natural Language :: English',
-                   'Operating System :: Unix',
-                   'Programming Language :: Python :: 2.7',
-                   'Topic :: Application'],
-      license='New BSD')
+
+      classifiers=[
+            'Environment :: Web Environment',
+            'Framework :: Django',
+            'Framework :: Django :: 2.0',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: BSD License',
+            'Operating System :: not OS Independent',
+            'Programming Language :: Python',
+            'Programming Language :: Python :: 3.6',
+            'Topic :: Internet :: WWW/HTTP',
+            'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
+      ],
+      requires=['django(>=2.0)', 'easy_thumbnails'],
+)
