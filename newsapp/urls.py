@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from django.shortcuts import redirect
-from .settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES
+from .settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, ENABLE_TAGS
 from . import views
 
 
@@ -24,7 +24,7 @@ if ENABLE_CATEGORIES:
         path('category/<slug:category_url>/page-<int:page>/', views.news_list)
     ]
 
-if ENABLE_CATEGORIES:
+if ENABLE_TAGS:
     urlpatterns += [
         path('tag/<slug:tag_url>/', views.news_list, name="tag"),
         path('tag/<slug:tag_url>/page-<int:page>', views.news_list),
