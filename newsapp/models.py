@@ -2,7 +2,7 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from django.db.models import Count, Max
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import datetime
 from django.urls import reverse
 from .settings_newsapp import ENABLE_ARCHIVE, ENABLE_CATEGORIES, NEWS_CLASS, ENABLE_TAGS
